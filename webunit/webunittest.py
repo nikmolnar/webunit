@@ -394,8 +394,11 @@ class WebFetcher:
         cookie_list = []
         for domain, cookies in self.cookies.items():
             # check cookie domain
+            if domain.startswith('.'):
+                domain = domain[1:]
             if not server.endswith(domain):
                 continue
+
             for path, cookies in cookies.items():
                 # check that the path matches
                 urlpath = urlparse.urlparse(url)[2]
